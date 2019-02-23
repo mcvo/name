@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Ball Names</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important; }</style>
+</head>
+<body>
+<br/>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+<div ng-app="myApp" ng-controller="customersCtrl"> 
+<table class="table table-bordered ng-cloak">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="x in names">
+    <td>{{ x.first_name }}</td>
+    <td>{{ x.last_name }}</td>
+  </tr>
+  </tbody>
+</table>
+</div>
+      </div>
+    </div>
+  </div>
+<br/><br/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha256-fzFFyH01cBVPYzl16KT40wqjhgPtq6FFUB6ckN2+GGw=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.7/angular.min.js" integrity="sha256-G+QuLmrpPCq07dbFF1iKLjl3nL6Mvv1qVoMzLVyHpp0=" crossorigin="anonymous"></script>
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+    $http.get("https://www.balldontlie.io/api/v1/players")
+    .then(function (response) {$scope.names = response.data.data;});
+});
+app.config(['$compileProvider', function ($compileProvider) {
+  $compileProvider.debugInfoEnabled(false);
+}]);
+</script>
+</body>
+</html>
